@@ -7,10 +7,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    
+    # Blindaje global para evitar errores de decodificación Unicode en Python
+    env:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+      PYTHONUTF8: 1
 
     steps:
     - name: Descargar Código del Repositorio
       uses: actions/checkout@v4
+
+    - name: Configurar Java 17 (Requerido por Gradle)
+      id: setup-java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
     - name: Configurar Python 3.10
       uses: actions/setup-python@v5
@@ -20,7 +33,7 @@ jobs:
     - name: Instalar Dependencias del Sistema Linux
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential libsqlite3-dev lld openjdk-17-jdk zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
+        sudo apt-get install -y build-essential libsqlite3-dev lld zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
         pip install --upgrade pip
         pip install buildozer cython
 
@@ -37,7 +50,9 @@ jobs:
 
     - name: Ejecutar Compilación con Buildozer
       run: |
-        export PATH=$PATH:~/.local/bin
+        # Forzamos explícitamente a Buildozer a usar la ruta de Java 17 recién instalada
+        export JAVA_HOME=${{ steps.setup-java.outputs.java-home }}
+        export PATH=$JAVA_HOME/bin:$PATH:~/.local/bin
         buildozer android debug
       env:
         BUILDOZER_ALLOW_KIVY_NEW_DESIGNER: 1
