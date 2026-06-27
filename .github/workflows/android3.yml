@@ -49,7 +49,12 @@ jobs:
 
     - name: Ejecutar Compilación con Buildozer
       run: |
-        # Dejamos que el sistema use las rutas limpias automáticas de Java 17 y Python
+        # Desactivamos el NDK r27 preinstalado de GitHub para evitar conflictos catastróficos
+        unset ANDROID_NDK
+        unset ANDROID_NDK_HOME
+        unset ANDROID_NDK_LATEST_HOME
+        
+        # Buildozer ahora descargará y aislará su propio NDK 25b estable de forma limpia
         buildozer android debug
       env:
         BUILDOZER_ALLOW_KIVY_NEW_DESIGNER: 1
