@@ -1129,6 +1129,9 @@ classDiagram
 
 > [!TIP]
 > Este documento cubre la **totalidad** del proyecto Anti-Spyware SMS Monitor: cada archivo, cada función, cada línea de código, cada decisión de diseño, cada tabla de la base de datos, y cada flujo de ejecución. Puede servir como base para la documentación del proyecto de grado o como referencia técnica para futuros desarrolladores.
+> [!TIP]
+> Ademas de ello, se recomienda desactivar los servicios de Google Play Protect, para que asi deje correr el Anti-Spyware SMS Monitor, y pueda leer de manera segura las aplicaciones en las cuales puede estarse filtrando para robar datos personales criticos.
+
 
 ---
 
