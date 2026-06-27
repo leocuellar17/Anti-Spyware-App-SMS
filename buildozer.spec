@@ -19,7 +19,7 @@ source.include_exts = py,png,jpg,kv,atlas,db
 version = 1.0
 
 # ==============================================================================
-# REQUERIMIENTOS: Dejamos python3 limpio para que la rama elegida maneje su versión nativa
+# REQUERIMIENTOS LIMPIOS
 # ==============================================================================
 requirements = python3,kivy==2.3.0,kivymd==1.1.1,pyjnius,sqlite3
 
@@ -28,8 +28,7 @@ orientation = portrait
 fullscreen = 1
 
 # ==============================================================================
-# EL PUNTO DE EQUILIBRIO: Forzamos una rama de lanzamiento moderna pero ultra-estable.
-# Tiene soporte AAB para Buildozer y usa Python 3.11 interno para evitar el error de C.
+# CONTROL DE ENTORNO SEGURO
 # ==============================================================================
 p4a.branch = release-2024.01.21
 
@@ -43,6 +42,11 @@ android.accept_sdk_license = True
 android.ndk = 25b
 android.ndk_api = 24
 android.private_storage = True
+
+# ==============================================================================
+# SOLUCIÓN PARA XIAOMI 15T: Compilamos en arquitectura moderna de 64 bits
+# ==============================================================================
+android.archs = armeabi-v7a arm64-v8a
 
 # Permisos para el análisis forense de SMS
 android.permissions = android.permission.READ_SMS, android.permission.RECEIVE_SMS
