@@ -19,7 +19,6 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Configurar Java 17 (Requerido por Gradle)
-      id: setup-java
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
@@ -50,9 +49,7 @@ jobs:
 
     - name: Ejecutar Compilación con Buildozer
       run: |
-        # Forzamos explícitamente a Buildozer a usar la ruta de Java 17 recién instalada
-        export JAVA_HOME=${{ steps.setup-java.outputs.java-home }}
-        export PATH=$JAVA_HOME/bin:$PATH:~/.local/bin
+        # Dejamos que el sistema use las rutas limpias automáticas de Java 17 y Python
         buildozer android debug
       env:
         BUILDOZER_ALLOW_KIVY_NEW_DESIGNER: 1
