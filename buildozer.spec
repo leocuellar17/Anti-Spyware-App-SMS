@@ -19,7 +19,7 @@ source.include_exts = py,png,jpg,kv,atlas,db
 version = 1.0
 
 # ==============================================================================
-# REQUERIMIENTOS LIMPIOS: Dejamos 'python3' limpio para que la rama estable elija la versión
+# REQUERIMIENTOS: Dejamos python3 limpio para que la rama elegida maneje su versión nativa
 # ==============================================================================
 requirements = python3,kivy==2.3.0,kivymd==1.1.1,pyjnius,sqlite3
 
@@ -28,10 +28,10 @@ orientation = portrait
 fullscreen = 1
 
 # ==============================================================================
-# CONTROL DE ENTORNO SEGURO: Forzamos a python-for-android a usar su rama ESTABLE
-# Esto evitará CUALQUIER intento de usar Python 3.14 experimental.
+# EL PUNTO DE EQUILIBRIO: Forzamos una rama de lanzamiento moderna pero ultra-estable.
+# Tiene soporte AAB para Buildozer y usa Python 3.11 interno para evitar el error de C.
 # ==============================================================================
-p4a.branch = stable
+p4a.branch = release-2024.01.21
 
 # ==========================================
 # CONFIGURACIÓN ESPECÍFICA DE ANDROID
