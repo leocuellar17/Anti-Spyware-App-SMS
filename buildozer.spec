@@ -46,7 +46,7 @@ android.private_storage = True
 # ==============================================================================
 # SOLUCIÓN PARA XIAOMI 15T: Compilamos en arquitectura moderna de 64 bits
 # ==============================================================================
-android.archs = armeabi-v7a arm64-v8a
+android.archs = arm64-v8a
 
 # Permisos para el análisis forense de SMS
 android.permissions = android.permission.READ_SMS, android.permission.RECEIVE_SMS
