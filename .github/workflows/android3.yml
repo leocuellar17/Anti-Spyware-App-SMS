@@ -1,0 +1,49 @@
+name: Compilar APK Antigravity Definitivo
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Descargar Código del Repositorio
+      uses: actions/checkout@v4
+
+    - name: Configurar Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Instalar Dependencias del Sistema Linux
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential libsqlite3-dev lld openjdk-17-jdk zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
+        pip install --upgrade pip
+        pip install buildozer cython
+
+    - name: Asegurar Archivo main.py (Defensa contra olvidos)
+      run: |
+        if [ -f "assm_core.py" ]; then
+          mv assm_core.py main.py
+          echo "Se detectó assm_core.py y se renombró a main.py automáticamente."
+        fi
+        if [ ! -f "main.py" ]; then
+          echo "ERROR: No se encontró main.py ni assm_core.py en la raíz del repositorio."
+          exit 1
+        fi
+
+    - name: Ejecutar Compilación con Buildozer
+      run: |
+        export PATH=$PATH:~/.local/bin
+        buildozer android debug
+      env:
+        BUILDOZER_ALLOW_KIVY_NEW_DESIGNER: 1
+
+    - name: Guardar y Subir el APK Generado
+      uses: actions/upload-artifact@v4
+      with:
+        name: AntiSpyware-APK
+        path: bin/*.apk
