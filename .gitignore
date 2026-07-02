@@ -1,0 +1,30 @@
+# --- Buildozer (compilacion Android) ---
+.buildozer/
+bin/
+*.apk
+*.aab
+
+# --- Base de datos SQLite generada en runtime ---
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# --- Logs ---
+*.log
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+
+# --- Editores / IDEs ---
+.vscode/
+.idea/
+*.swp
